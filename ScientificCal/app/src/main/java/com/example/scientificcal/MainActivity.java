@@ -8,21 +8,30 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
-    Button add, subtract, multiply, divide, one, two, three, four, five, six, seven, eight, nine, zero, zero_2, equal;
-    TextView result;
+    Button add, subtract, multiply, divide, one, two, three,
+            four, five, six, seven, eight, nine, zero, zero_2,
+            equal,del, clear;
+    TextView result, note, midResult;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        add = (Button) findViewById(R.id.add);
-        subtract = (Button)findViewById(R.id.subtract);
-        multiply = (Button)findViewById(R.id.multiply);
-        divide = (Button)findViewById(R.id.divide);
+        note = findViewById(R.id.note);
+        midResult = findViewById(R.id.midResult);
+        result = findViewById(R.id.result);
+
+        clear = findViewById(R.id.clear);
+        del = findViewById(R.id.del);
+
+        add = findViewById(R.id.add);
+        subtract = findViewById(R.id.subtract);
+        multiply = findViewById(R.id.multiply);
+        divide = findViewById(R.id.divide);
         equal = findViewById(R.id.equal);
 
-        result = findViewById(R.id.result);
+
 
         one = findViewById(R.id.one);
         two = findViewById(R.id.two);
@@ -36,32 +45,31 @@ public class MainActivity extends AppCompatActivity {
         zero = findViewById(R.id.zero);
         zero_2 = findViewById(R.id.zero_2);
 
-
         View.OnClickListener numberButton = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 switch(v.getId()){
-                    case R.id.one: result.setText("1");
+                    case R.id.one: note.append("1");
                         break;
-                    case R.id.two: result.setText("2");
+                    case R.id.two: note.append("2");
                         break;
-                    case R.id.three: result.setText("3");
+                    case R.id.three: note.append("3");
                         break;
-                    case R.id.four: result.setText("4");
+                    case R.id.four: note.append("4");
                         break;
-                    case R.id.five: result.setText("5");
+                    case R.id.five: note.append("5");
                         break;
-                    case R.id.six: result.setText("6");
+                    case R.id.six: note.append("6");
                         break;
-                    case R.id.seven: result.setText("7");
+                    case R.id.seven: note.append("7");
                         break;
-                    case R.id.eight: result.setText("8");
+                    case R.id.eight: note.append("8");
                         break;
-                    case R.id.nine: result.setText("9");
+                    case R.id.nine: note.append("9");
                         break;
-                    case R.id.zero: result.setText("0");
+                    case R.id.zero: note.append("0");
                         break;
-                    case R.id.zero_2: result.setText("00");
+                    case R.id.zero_2: note.append("00");
                         break;
                     default:
                         Toast.makeText(getApplicationContext(),"기능미구현",Toast.LENGTH_SHORT).show();
@@ -69,12 +77,66 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         };
+        View.OnClickListener calButton = new View.OnClickListener() {
+            //연산자 두번올때 경우 처리 필요
+            @Override
+            public void onClick(View v) {
+                String value = note.getText().toString();
+                if(value.equals("")){
+                    Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(MainActivity.this, "연산기능 미구현", Toast.LENGTH_SHORT).show();
+                    switch (v.getId()) {
+                        case R.id.add:
+                            note.append("+");
+                            break;
+                        case R.id.subtract:
+                            note.append("-");
+                            break;
+                        case R.id.multiply:
+                            note.append("X");
+                            break;
+                        case R.id.divide:
+                            note.append("/");
+                            break;
+                        case R.id.equal:
+                            Toast.makeText(MainActivity.this, "기능미구현", Toast.LENGTH_SHORT).show();
+                            break;
+                        default:
+                            Toast.makeText(getApplicationContext(), "기능미구현", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            }
+        };
+        clear.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v) {
+                result.setText("");
+                note.setText("");
+                midResult.setText("");
+                Toast.makeText(MainActivity.this, "초기화", Toast.LENGTH_SHORT).show();
 
-        add.setOnClickListener(numberButton);
-        subtract.setOnClickListener(numberButton);
-        multiply.setOnClickListener(numberButton);
-        divide.setOnClickListener(numberButton);
-        equal.setOnClickListener(numberButton);
+            }
+        });
+        del.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = note.getText().toString();
+
+                if(value.equals("")){
+                    Toast.makeText(MainActivity.this, "지울 숫자가 없습니다.", Toast.LENGTH_SHORT).show();
+                } else {
+                    note.setText(value.substring(0,value.length()-1));
+                }
+                //Toast.makeText(getApplicationContext(),"기능 미구현",Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        add.setOnClickListener(calButton);
+        subtract.setOnClickListener(calButton);
+        multiply.setOnClickListener(calButton);
+        divide.setOnClickListener(calButton);
+        equal.setOnClickListener(calButton);
 
         one.setOnClickListener(numberButton);
         two.setOnClickListener(numberButton);

@@ -7,6 +7,9 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import static java.lang.Double.parseDouble;
+import static java.lang.Integer.parseInt;
+
 public class MainActivity extends AppCompatActivity {
     Button add, subtract, multiply, divide, one, two, three,
             four, five, six, seven, eight, nine, zero, zero_2,
@@ -78,29 +81,71 @@ public class MainActivity extends AppCompatActivity {
             }
         };
         View.OnClickListener calButton = new View.OnClickListener() {
-            //연산자 두번올때 경우 처리 필요
+            //연산자를 두번째 사용하는 경우 처리 필요
+            //연산자를 연속으로 사용할 경우 처리 필요
+
             @Override
             public void onClick(View v) {
-                String value = note.getText().toString();
-                if(value.equals("")){
+                String midValue= midResult.getText().toString();
+                String noteValue = note.getText().toString();
+                if(noteValue.equals("")){
                     Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(MainActivity.this, "연산기능 미구현", Toast.LENGTH_SHORT).show();
+                    //Toast.makeText(MainActivity.this, "연산기능 미구현", Toast.LENGTH_SHORT).show();
                     switch (v.getId()) {
                         case R.id.add:
-                            note.append("+");
+                            if(noteValue.contains("+")||noteValue.contains("-")||noteValue.contains("X")||noteValue.contains("/")){
+                                Toast.makeText(MainActivity.this, "다중연산 미구현", Toast.LENGTH_SHORT).show();
+                            } else {
+                                midResult.setText(noteValue);
+                                note.append("+");
+                            }
                             break;
                         case R.id.subtract:
-                            note.append("-");
+                            if(noteValue.contains("+")||noteValue.contains("-")||noteValue.contains("X")||noteValue.contains("/")){
+                                Toast.makeText(MainActivity.this, "다중연산 미구현", Toast.LENGTH_SHORT).show();
+                            } else {
+                                midResult.setText(noteValue);
+                                note.append("-");
+                            }
                             break;
                         case R.id.multiply:
-                            note.append("X");
+                            if(noteValue.contains("+")||noteValue.contains("-")||noteValue.contains("X")||noteValue.contains("/")){
+                                Toast.makeText(MainActivity.this, "다중연산 미구현", Toast.LENGTH_SHORT).show();
+                            } else {
+                                midResult.setText(noteValue);
+                                note.append("X");
+                            }
                             break;
                         case R.id.divide:
-                            note.append("/");
+                            if(noteValue.contains("+")||noteValue.contains("-")||noteValue.contains("X")||noteValue.contains("/")){
+                                Toast.makeText(MainActivity.this, "다중연산 미구현", Toast.LENGTH_SHORT).show();
+                            } else {
+                                midResult.setText(noteValue);
+                                note.append("/");
+                            }
                             break;
                         case R.id.equal:
-                            Toast.makeText(MainActivity.this, "기능미구현", Toast.LENGTH_SHORT).show();
+                            if(noteValue.contains("+")){
+                                String curValue = noteValue.substring(noteValue.indexOf("+")+1);
+                                int resultValue = parseInt(midValue) + parseInt(curValue);
+                                result.setText(String.valueOf(resultValue));
+
+                            } else if(noteValue.contains("-")){
+                                String curValue = noteValue.substring(noteValue.indexOf("-")+1);
+                                int resultValue = parseInt(midValue) - parseInt(curValue);
+                                result.setText(String.valueOf(resultValue));
+
+                            } else if(noteValue.contains("X")){
+                                String curValue = noteValue.substring(noteValue.indexOf("X")+1);
+                                int resultValue = parseInt(midValue) * parseInt(curValue);
+                                result.setText(String.valueOf(resultValue));
+
+                            } else if(noteValue.contains("/")){
+                                String curValue = noteValue.substring(noteValue.indexOf("/")+1);
+                                double resultValue = parseDouble(midValue) / parseDouble(curValue);
+                                result.setText(String.valueOf(resultValue));
+                            }
                             break;
                         default:
                             Toast.makeText(getApplicationContext(), "기능미구현", Toast.LENGTH_SHORT).show();
@@ -150,7 +195,6 @@ public class MainActivity extends AppCompatActivity {
         zero.setOnClickListener(numberButton);
         zero_2.setOnClickListener(numberButton);
     }
-
 
 
 }

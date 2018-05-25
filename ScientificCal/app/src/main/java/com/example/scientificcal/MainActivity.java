@@ -34,8 +34,6 @@ public class MainActivity extends AppCompatActivity {
         divide = findViewById(R.id.divide);
         equal = findViewById(R.id.equal);
 
-
-
         one = findViewById(R.id.one);
         two = findViewById(R.id.two);
         three = findViewById(R.id.three);

@@ -13,14 +13,14 @@ import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button shift, up, down, right, left, backspace, squre, root, left_bracket, right_bracket, previouse_answer, constant,
-            one, two, three, four, five, six, seven, eight, nine, zero, doubleZero, clear, allClear;
-    ImageButton add, subtract, multiply, divide, equal, dot;
+    Button backspace, mod, one, two, three, four, five, six, seven, eight, nine, zero, doubleZero, clear, allClear;
+    ImageButton add, subtract, multiply, divide, equal, root, dot;
     TextView formula;
     String operator = "";
     int count = 0;
     int operatorCount = 0;
     String midResult = "";
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -30,7 +30,7 @@ public class MainActivity extends AppCompatActivity {
         allClear = findViewById(R.id.allClear);
 
         formula = findViewById(R.id.formula);
-        
+
         one = findViewById(R.id.one);
         two = findViewById(R.id.two);
         three = findViewById(R.id.three);
@@ -45,9 +45,12 @@ public class MainActivity extends AppCompatActivity {
         dot = findViewById(R.id.dot);
 
         add = findViewById(R.id.add);
+        mod = findViewById(R.id.mod);
         subtract = findViewById(R.id.subtract);
         multiply = findViewById(R.id.multiply);
         divide = findViewById(R.id.divide);
+
+        root = findViewById(R.id.root);
         equal = findViewById(R.id.equal);
 
 
@@ -56,10 +59,10 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String value = formula.getText().toString();
                 operatorCount = 0;
-                switch(v.getId()) {
+                switch (v.getId()) {
                     case R.id.one:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("1");
                                 count++;
                             } else {
@@ -71,8 +74,8 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.two:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("2");
                                 count++;
                             } else {
@@ -83,8 +86,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.three:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("3");
                                 count++;
                             } else {
@@ -95,8 +98,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.four:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("4");
                                 count++;
                             } else {
@@ -107,8 +110,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.five:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("5");
                                 count++;
                             } else {
@@ -119,8 +122,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.six:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("6");
                                 count++;
                             } else {
@@ -131,8 +134,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.seven:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("7");
                                 count++;
                             } else {
@@ -143,8 +146,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.eight:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("8");
                                 count++;
                             } else {
@@ -155,8 +158,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.nine:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("9");
                                 count++;
                             } else {
@@ -167,8 +170,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.zero:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("0");
                                 count++;
                             } else {
@@ -179,8 +182,8 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.doubleZero:
-                        if(operator != ""){
-                            if(count == 0) {
+                        if (operator != "") {
+                            if (count == 0) {
                                 formula.setText("00");
                                 count++;
                             } else {
@@ -191,7 +194,7 @@ public class MainActivity extends AppCompatActivity {
                         }
                         break;
                     case R.id.dot:
-                        if(value.equals("")){
+                        if (value.equals("")) {
                             formula.append("0.");
                         } else {
                             formula.append(".");
@@ -203,13 +206,13 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = formula.getText().toString();
-                if(value.equals("")){
+                if (value.equals("")) {
                     Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
                 } else {
                     count = 0;
                     switch (v.getId()) {
                         case R.id.add:
-                            if(operatorCount != 0) {
+                            if (operatorCount != 0) {
                                 operator = "+";
                             } else {
                                 setResult(value);
@@ -218,7 +221,7 @@ public class MainActivity extends AppCompatActivity {
                             operator = "+";
                             break;
                         case R.id.subtract:
-                            if(operatorCount != 0) {
+                            if (operatorCount != 0) {
                                 operator = "-";
                             } else {
                                 setResult(value);
@@ -227,7 +230,7 @@ public class MainActivity extends AppCompatActivity {
                             operator = "-";
                             break;
                         case R.id.multiply:
-                            if(operatorCount != 0) {
+                            if (operatorCount != 0) {
                                 operator = "*";
                             } else {
                                 setResult(value);
@@ -236,13 +239,28 @@ public class MainActivity extends AppCompatActivity {
                             operator = "*";
                             break;
                         case R.id.divide:
-                            if(operatorCount != 0) {
+                            if (operatorCount != 0) {
                                 operator = "/";
                             } else {
                                 setResult(value);
                             }
                             operatorCount++;
                             operator = "/";
+                            break;
+                        case R.id.mod:
+                            if (operatorCount != 0) {
+                                operator = "%";
+                            } else {
+                                setResult(value);
+                            }
+                            operatorCount++;
+                            operator = "%";
+                            break;
+                        case R.id.root:
+                            operator = "@";
+                            setResult(value);
+                            operatorCount++;
+                            operator = "@";
                             break;
                     }
                 }
@@ -295,43 +313,62 @@ public class MainActivity extends AppCompatActivity {
         subtract.setOnClickListener(calButton);
         multiply.setOnClickListener(calButton);
         divide.setOnClickListener(calButton);
+        mod.setOnClickListener(calButton);
+        root.setOnClickListener(calButton);
     }
-    public void setResult(String value){
-        if(value.contains(".")||midResult.contains(".")){
-            if(operator == "+"){
-                double result = parseDouble(midResult)+ parseDouble(value);
-                formula.setText(String.valueOf(result));
-                midResult = String.valueOf(result);
-            } else if(operator == "-"){
-                double result = parseDouble(midResult)- parseDouble(value);
-                formula.setText(String.valueOf(result));
-                midResult = String.valueOf(result);
-            }else if(operator == "*"){
-                double result = parseDouble(midResult)* parseDouble(value);
-                formula.setText(String.valueOf(result));
-                midResult = String.valueOf(result);
-            }else if(operator == "/"){
-                double result = parseDouble(midResult)/ parseDouble(value);
-                formula.setText(String.valueOf(result));
-                midResult = String.valueOf(result);
-            } else if(operator == "") {
-                midResult = value;
-            }
-        } else {
+
+    public void setResult(String value) {
+        if (value.contains(".") || midResult.contains(".")) {
             if (operator == "+") {
-                int result = parseInt(midResult) + parseInt(value);
+                double result = parseDouble(midResult) + parseDouble(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "-") {
-                int result = parseInt(midResult) - parseInt(value);
+                double result = parseDouble(midResult) - parseDouble(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "*") {
-                int result = parseInt(midResult) * parseInt(value);
+                double result = parseDouble(midResult) * parseDouble(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "/") {
                 double result = parseDouble(midResult) / parseDouble(value);
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "%") {
+                double result = parseDouble(midResult) % parseDouble(value);
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "@") {
+                double result = Math.sqrt(parseDouble(value));
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "") {
+                midResult = value;
+            }
+        } else {
+            if (operator == "+") {
+                double result = parseDouble(midResult) + parseDouble(value);
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "-") {
+                double result = parseDouble(midResult) - parseDouble(value);
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "*") {
+                double result = parseDouble(midResult) * parseDouble(value);
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "/") {
+                double result = parseDouble(midResult) / parseDouble(value);
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "%") {
+                int result = parseInt(midResult) % parseInt(value);
+                formula.setText(String.valueOf(result));
+                midResult = String.valueOf(result);
+            } else if (operator == "@") {
+                double result = Math.sqrt(parseDouble(value));
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "") {

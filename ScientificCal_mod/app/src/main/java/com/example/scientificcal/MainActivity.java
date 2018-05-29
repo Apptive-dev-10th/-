@@ -1,6 +1,8 @@
 package com.example.scientificcal;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
@@ -13,9 +15,10 @@ import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button backspace, mod, one, two, three, four, five, six, seven, eight, nine, zero, doubleZero, clear, allClear;
+    Button switchMark, backspace, mod, one, two, three, four, five, six, seven, eight, nine, zero, doubleZero, clear, allClear;
     ImageButton add, subtract, multiply, divide, equal, root, dot;
     TextView formula;
+    FloatingActionButton fab;
     String operator = "";
     int count = 0;
     int operatorCount = 0;
@@ -26,9 +29,10 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        switchMark = findViewById(R.id.switchMark);
         clear = findViewById(R.id.clear);
         allClear = findViewById(R.id.allClear);
-
+        fab = findViewById(R.id.fab);
         formula = findViewById(R.id.formula);
 
         one = findViewById(R.id.one);
@@ -52,6 +56,7 @@ public class MainActivity extends AppCompatActivity {
 
         root = findViewById(R.id.root);
         equal = findViewById(R.id.equal);
+        backspace = findViewById(R.id.backspace);
 
 
         View.OnClickListener numberButton = new View.OnClickListener() {
@@ -206,67 +211,119 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 String value = formula.getText().toString();
-                if (value.equals("")) {
-                    Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
-                } else {
+
                     count = 0;
                     switch (v.getId()) {
                         case R.id.add:
-                            if (operatorCount != 0) {
-                                operator = "+";
+                            if (value.equals("")) {
+                                Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
                             } else {
-                                setResult(value);
+                                if (operatorCount != 0) {
+                                    operator = "+";
+                                } else {
+                                    setResult(value);
+                                }
+                                operatorCount++;
+                                operator = "+";
                             }
-                            operatorCount++;
-                            operator = "+";
+
                             break;
                         case R.id.subtract:
-                            if (operatorCount != 0) {
-                                operator = "-";
+                            if (value.equals("")) {
+                                formula.append("-");
                             } else {
-                                setResult(value);
+                                if (operatorCount != 0) {
+                                    operator = "-";
+                                } else {
+                                    setResult(value);
+                                }
+                                operatorCount++;
+                                operator = "-";
                             }
-                            operatorCount++;
-                            operator = "-";
                             break;
                         case R.id.multiply:
-                            if (operatorCount != 0) {
-                                operator = "*";
+                            if (value.equals("")) {
+                                Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
                             } else {
-                                setResult(value);
+                                if (operatorCount != 0) {
+                                    operator = "*";
+                                } else {
+                                    setResult(value);
+                                }
+
+                                operatorCount++;
+                                operator = "*";
                             }
-                            operatorCount++;
-                            operator = "*";
                             break;
                         case R.id.divide:
-                            if (operatorCount != 0) {
-                                operator = "/";
+                            if (value.equals("")) {
+                                Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
                             } else {
-                                setResult(value);
+                                if (operatorCount != 0) {
+                                    operator = "/";
+                                } else {
+                                    setResult(value);
+                                }
+
+                                operatorCount++;
+                                operator = "/";
                             }
-                            operatorCount++;
-                            operator = "/";
                             break;
                         case R.id.mod:
-                            if (operatorCount != 0) {
-                                operator = "%";
+                            if (value.equals("")) {
+                                Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
                             } else {
-                                setResult(value);
+                                if (operatorCount != 0) {
+                                    operator = "%";
+                                } else {
+                                    setResult(value);
+                                }
+
+                                operatorCount++;
+                                operator = "%";
                             }
-                            operatorCount++;
-                            operator = "%";
                             break;
                         case R.id.root:
-                            operator = "@";
-                            setResult(value);
-                            operatorCount++;
-                            operator = "@";
+                            if (value.equals("")) {
+                                Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
+                            } else {
+                                operator = "@";
+                                setResult(value);
+                                operatorCount++;
+                            }
                             break;
                     }
                 }
-            }
-        };
 
+        };
+        switchMark.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = formula.getText().toString();
+
+                if(value.contains(".")){
+                    double result = -parseDouble(value);
+                    formula.setText(String.valueOf(result));
+                } else{
+                    int result = -parseInt(value);
+                    formula.setText(String.valueOf(result));
+                }
+            }
+        });
+        backspace.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = formula.getText().toString();
+                formula.setText(value.substring(0,value.length()-1));
+            }
+        });
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), FabActivity.class);
+                startActivity(intent);
+            }
+        });
         equal.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -348,23 +405,23 @@ public class MainActivity extends AppCompatActivity {
             }
         } else {
             if (operator == "+") {
-                double result = parseDouble(midResult) + parseDouble(value);
+                int result = parseInt(midResult) + parseInt(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "-") {
-                double result = parseDouble(midResult) - parseDouble(value);
+                int result = parseInt(midResult) - parseInt(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "*") {
-                double result = parseDouble(midResult) * parseDouble(value);
+                int result = parseInt(midResult) * parseInt(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "/") {
-                double result = parseDouble(midResult) / parseDouble(value);
+                int result = parseInt(midResult) / parseInt(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "%") {
-                int result = parseInt(midResult) % parseInt(value);
+                double result = parseDouble(midResult) % parseDouble(value);
                 formula.setText(String.valueOf(result));
                 midResult = String.valueOf(result);
             } else if (operator == "@") {

@@ -167,6 +167,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1">
                 <Button
+                    android:id="@+id/backspace"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/round_corner_yellow"
@@ -302,6 +303,7 @@
                 android:layout_marginRight="10dp"
                 android:layout_weight="1">
                 <Button
+                    android:id="@+id/switchMark"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:background="@drawable/round_corner_yellow"
@@ -651,12 +653,17 @@
                     android:scaleType="centerInside"
                     android:padding="6dp"/>
             </LinearLayout>
-            <LinearLayout
+            <FrameLayout
                 android:layout_width="0dp"
                 android:layout_height="match_parent"
-                android:layout_marginRight="10dp"
+                android:layout_marginLeft="10dp"
                 android:layout_weight="1">
-            </LinearLayout>
+                <android.support.design.widget.FloatingActionButton
+                    android:id="@+id/fab"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"/>
+            </FrameLayout>
         </LinearLayout>
     </LinearLayout>
 

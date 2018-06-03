@@ -15,7 +15,7 @@ import static java.lang.Integer.parseInt;
 
 public class MainActivity extends AppCompatActivity {
 
-    Button switchMark, backspace, mod, one, two, three, four, five, six, seven, eight, nine, zero, doubleZero, clear, allClear;
+    Button switchMark, backspace, mod, one, two, three, four, five, six, seven, eight, nine, zero, doubleZero, clear, allClear, taxAdd, taxSubtract;
     ImageButton add, subtract, multiply, divide, equal, root, dot;
     TextView formula;
     FloatingActionButton fab;
@@ -23,11 +23,15 @@ public class MainActivity extends AppCompatActivity {
     int count = 0;
     int operatorCount = 0;
     String midResult = "";
-
+    int taxRate = 5;
+    boolean tax = false;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        taxAdd = findViewById(R.id.taxAdd);
+        taxSubtract = findViewById(R.id.taxSubtract);
 
         switchMark = findViewById(R.id.switchMark);
         clear = findViewById(R.id.clear);
@@ -59,6 +63,7 @@ public class MainActivity extends AppCompatActivity {
         backspace = findViewById(R.id.backspace);
 
 
+
         View.OnClickListener numberButton = new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -66,136 +71,235 @@ public class MainActivity extends AppCompatActivity {
                 operatorCount = 0;
                 switch (v.getId()) {
                     case R.id.one:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("1");
+                                    count++;
+                                } else {
+                                    formula.append("1");
+                                }
+                            } else {
+                                formula.append("1");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("1");
                                 count++;
                             } else {
                                 formula.append("1");
                             }
-                        } else {
-                            formula.append("1");
                         }
 
                         break;
                     case R.id.two:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("2");
+                                    count++;
+                                } else {
+                                    formula.append("2");
+                                }
+                            } else {
+                                formula.append("2");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("2");
                                 count++;
                             } else {
                                 formula.append("2");
                             }
-                        } else {
-                            formula.append("2");
                         }
                         break;
                     case R.id.three:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("3");
+                                    count++;
+                                } else {
+                                    formula.append("3");
+                                }
+                            } else {
+                                formula.append("3");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("3");
                                 count++;
                             } else {
                                 formula.append("3");
                             }
-                        } else {
-                            formula.append("3");
                         }
                         break;
                     case R.id.four:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("4");
+                                    count++;
+                                } else {
+                                    formula.append("4");
+                                }
+                            } else {
+                                formula.append("4");
+                            }
+                        }else {
                             if (count == 0) {
                                 formula.setText("4");
                                 count++;
                             } else {
                                 formula.append("4");
                             }
-                        } else {
-                            formula.append("4");
                         }
                         break;
                     case R.id.five:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("5");
+                                    count++;
+                                } else {
+                                    formula.append("5");
+                                }
+                            } else {
+                                formula.append("5");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("5");
                                 count++;
                             } else {
                                 formula.append("5");
                             }
-                        } else {
-                            formula.append("5");
                         }
                         break;
                     case R.id.six:
-                        if (operator != "") {
+                        if(tax==false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("6");
+                                    count++;
+                                } else {
+                                    formula.append("6");
+                                }
+                            } else {
+                                formula.append("6");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("6");
                                 count++;
                             } else {
                                 formula.append("6");
                             }
-                        } else {
-                            formula.append("6");
                         }
                         break;
                     case R.id.seven:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("7");
+                                    count++;
+                                } else {
+                                    formula.append("7");
+                                }
+                            } else {
+                                formula.append("7");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("7");
                                 count++;
                             } else {
                                 formula.append("7");
                             }
-                        } else {
-                            formula.append("7");
                         }
                         break;
                     case R.id.eight:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("8");
+                                    count++;
+                                } else {
+                                    formula.append("8");
+                                }
+                            } else {
+                                formula.append("8");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("8");
                                 count++;
                             } else {
                                 formula.append("8");
                             }
-                        } else {
-                            formula.append("8");
                         }
                         break;
                     case R.id.nine:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("9");
+                                    count++;
+                                } else {
+                                    formula.append("9");
+                                }
+                            } else {
+                                formula.append("9");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("9");
                                 count++;
                             } else {
                                 formula.append("9");
                             }
-                        } else {
-                            formula.append("9");
                         }
                         break;
                     case R.id.zero:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("0");
+                                    count++;
+                                } else {
+                                    formula.append("0");
+                                }
+                            } else {
+                                formula.append("0");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("0");
                                 count++;
                             } else {
                                 formula.append("0");
                             }
-                        } else {
-                            formula.append("0");
                         }
                         break;
                     case R.id.doubleZero:
-                        if (operator != "") {
+                        if(tax == false) {
+                            if (operator != "") {
+                                if (count == 0) {
+                                    formula.setText("00");
+                                    count++;
+                                } else {
+                                    formula.append("00");
+                                }
+                            } else {
+                                formula.append("00");
+                            }
+                        } else {
                             if (count == 0) {
                                 formula.setText("00");
                                 count++;
                             } else {
                                 formula.append("00");
                             }
-                        } else {
-                            formula.append("00");
                         }
                         break;
                     case R.id.dot:
@@ -270,17 +374,23 @@ public class MainActivity extends AppCompatActivity {
                             }
                             break;
                         case R.id.mod:
-                            if (value.equals("")) {
-                                Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
-                            } else {
-                                if (operatorCount != 0) {
-                                    operator = "%";
+                            if( tax == false) {
+                                if (value.equals("")) {
+                                    Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
                                 } else {
-                                    setResult(value);
-                                }
+                                    if (operatorCount != 0) {
+                                        operator = "%";
+                                    } else {
+                                        setResult(value);
+                                    }
 
-                                operatorCount++;
-                                operator = "%";
+                                    operatorCount++;
+                                    operator = "%";
+                                }
+                            } else {
+                                taxRate = parseInt(value);
+                                Toast.makeText(MainActivity.this, "Tax Rate : "+ taxRate, Toast.LENGTH_SHORT).show();
+                                tax = false;
                             }
                             break;
                         case R.id.root:
@@ -296,6 +406,26 @@ public class MainActivity extends AppCompatActivity {
                 }
 
         };
+        taxAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                String value = formula.getText().toString();
+                if(tax = false){
+                    double result = parseDouble(value) * (1+taxRate/100);
+                    formula.setText(String.valueOf(result));
+                }
+            }
+
+        });
+        mod.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                String value = formula.getText().toString();
+                formula.setText(String.valueOf(taxRate));
+                tax = true;
+                return true;
+            }
+        });
         switchMark.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

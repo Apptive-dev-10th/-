@@ -37,6 +37,7 @@
                 android:orientation="vertical">
 
                 <LinearLayout
+                    android:id="@+id/info_AC"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_weight="1"
@@ -342,7 +343,7 @@
                             android:layout_width="match_parent"
                             android:layout_height="match_parent"
                             android:gravity="center_vertical"
-                            android:text="기능"
+                            android:text="아직 미구현이다냥. 조만간 추가하겠다냥"
                             android:layout_marginHorizontal="10dp"
                             android:fontFamily="@font/nanum_squareeb"/>
                     </LinearLayout>

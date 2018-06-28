@@ -225,10 +225,16 @@ public class MainActivity extends AppCompatActivity {
 
                         break;
                     case R.id.dot:
-                        if (value.equals("")) {
-                            formula.append("0.");
+                        if(value.contains(".")){
+                            Toast.makeText(MainActivity.this, "소수점은 한번만 써라냥", Toast.LENGTH_SHORT).show();
                         } else {
-                            formula.append(".");
+                            if (value.equals("")) {
+                                formula.append("0.");
+                            } else {
+                                formula.append(".");
+                                count++;
+
+                            }
                         }
                         break;
                 }
@@ -243,7 +249,7 @@ public class MainActivity extends AppCompatActivity {
                 switch (v.getId()) {
                     case R.id.add:
                         if (value.equals("")) {
-                            Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥.", Toast.LENGTH_SHORT).show();
                         } else {
                             if (operatorCount != 0) {
                                 operator = "+";
@@ -270,7 +276,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.multiply:
                         if (value.equals("")) {
-                            Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥.", Toast.LENGTH_SHORT).show();
                         } else {
                             if (operatorCount != 0) {
                                 operator = "*";
@@ -284,7 +290,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.divide:
                         if (value.equals("")) {
-                            Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥.", Toast.LENGTH_SHORT).show();
                         } else {
                             if (operatorCount != 0) {
                                 operator = "/";
@@ -299,7 +305,7 @@ public class MainActivity extends AppCompatActivity {
                     case R.id.mod:
                         if (tax == false) {
                             if (value.equals("")) {
-                                Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥.", Toast.LENGTH_SHORT).show();
                             } else {
                                 if (operatorCount != 0) {
                                     operator = "%";
@@ -319,7 +325,7 @@ public class MainActivity extends AppCompatActivity {
                         break;
                     case R.id.root:
                         if (value.equals("")) {
-                            Toast.makeText(MainActivity.this, "숫자를 먼저 넣어야합니다.", Toast.LENGTH_SHORT).show();
+                            Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥", Toast.LENGTH_SHORT).show();
                         } else {
                             operator = "@";
                             setResult(value);
@@ -334,7 +340,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String value = formula.getText().toString();
                 if(value.equals("")){
-                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥", Toast.LENGTH_SHORT).show();
                 } else {
                     count = 0;
                     setResult(value);
@@ -349,7 +355,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String value = formula.getText().toString();
                 if(value.equals("")){
-                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥", Toast.LENGTH_SHORT).show();
                 } else {
                     count = 0;
                     setResult(value);
@@ -389,7 +395,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String value = formula.getText().toString();
                 if(value.equals("")){
-                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥", Toast.LENGTH_SHORT).show();
                 } else {
                     if (tax == false) {
                         double result = parseDouble(value) * (1 + taxRate / 100.0);
@@ -407,7 +413,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String value = formula.getText().toString();
                 if(value.equals("")){
-                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥", Toast.LENGTH_SHORT).show();
                 } else {
                     double result = parseDouble(value) * (1 - taxRate / 100.0);
                     String transferResult = String.format("%.4f", result);
@@ -430,7 +436,7 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View v) {
                 String value = formula.getText().toString();
                 if(value.equals("")){
-                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해주세요", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(MainActivity.this, "숫자를 먼저 입력해라냥", Toast.LENGTH_SHORT).show();
                 } else {
                     if (value.contains(".")) {
                         double result = -parseDouble(value);
